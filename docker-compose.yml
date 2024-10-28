@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ang
+    ports:
+      - "5432:5432"
+  server:
+    build:
+      context: ./ang-morning-server
+      dockerfile: ../Dockerfile.server
+    environment:
+      - ORIGIN=http://server:3010
+      - APP_ENV=development
+      - PORT=3333
+      - DB_USER=postgres
+      - DB_PASSWORD=1234
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=ang
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./ang-morning-server/cmd:/server/cmd
+      - ./ang-morning-server/internal:/server/internal
+      - ./ang-morning-server/docs:/server/docs
+    restart: always
+    depends_on:
+      - db
