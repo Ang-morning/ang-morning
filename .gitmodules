@@ -1,3 +1,6 @@
 [submodule "ang-morning-server"]
 	path = ang-morning-server
 	url = https://github.com/Ang-morning/ang-morning-server.git
+[submodule "ang-morning-front"]
+	path = ang-morning-front
+	url = https://github.com/Ang-morning/ang-morning-front.git
